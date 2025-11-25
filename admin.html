@@ -62,7 +62,7 @@
     </nav>
 
     <!-- Header Section -->
-    <section class="hero" style="min-height: 50vh;">
+    <section class="hero" style="min-height: 40vh;">
         <div class="diagonal-stripes"></div>
         <div class="hero-content fade-in-up">
             <h1>Admin <span class="gradient-text">Panel</span></h1>
@@ -70,25 +70,135 @@
         </div>
     </section>
 
-    <!-- Admin Placeholder -->
+    <!-- Admin Section -->
     <section style="padding: 4rem 0;">
-        <div class="container" style="max-width: 600px;">
-            <div class="card" style="text-align: center; padding: 4rem 2rem;">
-                <div style="font-size: 4rem; margin-bottom: 1.5rem;">🔒</div>
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Admin Area</h2>
-                <p style="color: var(--muted-foreground); margin-bottom: 2rem;">
-                    This page is reserved for administrative functions and internal use only. 
-                    Admin features can be added here as needed.
+        <div class="container" style="max-width: 1100px;">
+
+            <!-- LOGIN SECTION -->
+            <div id="login-section" class="card" style="max-width: 450px; margin: 0 auto 3rem auto;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 1rem; text-align:center;">Admin Login</h2>
+                <p style="color: var(--muted-foreground); font-size: 0.9rem; text-align:center; margin-bottom: 1.5rem;">
+                    Only authorized staff of Elite Technology are allowed to access this panel.
                 </p>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem;">
-                    For assistance, contact:<br>
+
+                <form id="login-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div>
+                        <label for="admin-email" style="display:block; margin-bottom:0.25rem;">Email</label>
+                        <input id="admin-email" type="email" required placeholder="admin@example.com"
+                            style="width: 100%; padding: 0.6rem 0.8rem; border-radius: 0.5rem; border: 1px solid var(--border-color); background: rgba(15,15,15,0.9); color: #fff;">
+                    </div>
+                    <div>
+                        <label for="admin-password" style="display:block; margin-bottom:0.25rem;">Password</label>
+                        <input id="admin-password" type="password" required placeholder="Password"
+                            style="width: 100%; padding: 0.6rem 0.8rem; border-radius: 0.5rem; border: 1px solid var(--border-color); background: rgba(15,15,15,0.9); color: #fff;">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+                        Login
+                    </button>
+                    <p id="login-error" style="color:#ff6b6b; font-size:0.85rem; min-height:1.2em;"></p>
+                    <p style="color: var(--muted-foreground); font-size: 0.8rem; text-align:center;">
+                        Suggested admin email: <strong>elite9098@gmail.com</strong> (configure in Firebase Auth).
+                    </p>
+                </form>
+            </div>
+
+            <!-- DASHBOARD SECTION -->
+            <div id="admin-dashboard" style="display:none;">
+
+                <!-- Top bar -->
+                <div class="card" style="margin-bottom: 2rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem;">
+                    <div>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 0.3rem;">Welcome, Admin</h2>
+                        <p style="color: var(--muted-foreground); font-size: 0.9rem;">
+                            Logged in as: <span id="admin-user-email" style="color: var(--primary);"></span>
+                        </p>
+                    </div>
+                    <button id="logout-btn" class="btn btn-outline">
+                        Logout
+                    </button>
+                </div>
+
+                <!-- Dashboard grid -->
+                <div style="display:grid; gap:1.5rem; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);">
+                    
+                    <!-- Gallery Manager -->
+                    <div class="card">
+                        <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">Gallery Manager</h3>
+                        <p style="color: var(--muted-foreground); font-size:0.85rem; margin-bottom:1rem;">
+                            Upload new photos of completed work. These will appear on the Gallery page.
+                        </p>
+                        <form id="gallery-form" style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem;">
+                            <div>
+                                <label for="gallery-image" style="display:block; margin-bottom:0.25rem;">Image file</label>
+                                <input id="gallery-image" type="file" accept="image/*" required
+                                    style="width:100%; padding:0.5rem; border-radius:0.5rem; border:1px solid var(--border-color); background:rgba(15,15,15,0.9); color:#fff;">
+                            </div>
+                            <div>
+                                <label for="gallery-title" style="display:block; margin-bottom:0.25rem;">Title</label>
+                                <input id="gallery-title" type="text" placeholder="E.g. Shop CCTV installation" required
+                                    style="width:100%; padding:0.6rem 0.8rem; border-radius:0.5rem; border:1px solid var(--border-color); background:rgba(15,15,15,0.9); color:#fff;">
+                            </div>
+                            <div>
+                                <label for="gallery-description" style="display:block; margin-bottom:0.25rem;">Description</label>
+                                <textarea id="gallery-description" rows="2" placeholder="Short description of this work"
+                                    style="width:100%; padding:0.6rem 0.8rem; border-radius:0.5rem; border:1px solid var(--border-color); background:rgba(15,15,15,0.9); color:#fff;"></textarea>
+                            </div>
+                            <div>
+                                <label for="gallery-category" style="display:block; margin-bottom:0.25rem;">Category</label>
+                                <input id="gallery-category" type="text" placeholder="Home / Shop / School / Factory" 
+                                    style="width:100%; padding:0.6rem 0.8rem; border-radius:0.5rem; border:1px solid var(--border-color); background:rgba(15,15,15,0.9); color:#fff;">
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+                                Upload to Gallery
+                            </button>
+                            <p id="gallery-message" style="font-size:0.85rem; min-height:1.2em;"></p>
+                        </form>
+
+                        <h4 style="font-size:1.1rem; margin-bottom:0.5rem;">Existing Gallery Items</h4>
+                        <div id="gallery-items" style="display:flex; flex-direction:column; gap:0.75rem; max-height:260px; overflow:auto; border-top:1px solid rgba(255,255,255,0.06); padding-top:0.75rem;">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Feedback & Enquiries -->
+                    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+
+                        <!-- Feedback Manager -->
+                        <div class="card">
+                            <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">Feedback / Reviews</h3>
+                            <p style="color: var(--muted-foreground); font-size:0.85rem; margin-bottom:1rem;">
+                                Approve good feedback to show it as testimonials on the website.
+                            </p>
+                            <div id="feedback-items" style="display:flex; flex-direction:column; gap:0.75rem; max-height:180px; overflow:auto;">
+                                <!-- Filled by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Enquiry List -->
+                        <div class="card">
+                            <h3 style="font-size:1.3rem; margin-bottom:0.75rem;">Enquiries</h3>
+                            <p style="color: var(--muted-foreground); font-size:0.85rem; margin-bottom:1rem;">
+                                These come from the Contact form on the website.
+                            </p>
+                            <div id="enquiry-items" style="display:flex; flex-direction:column; gap:0.75rem; max-height:180px; overflow:auto;">
+                                <!-- Filled by JS -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact for help -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: var(--muted-foreground); font-size: 0.9rem;">
+                    For technical assistance with this admin panel, contact your developer or:<br>
                     Mohammed Kashif: <a href="tel:+919108865702" style="color: var(--primary);">+91 91088 65702</a><br>
                     Guru Prasad: <a href="tel:+919538737788" style="color: var(--primary);">+91 95387 37788</a>
                 </p>
-            </div>
-
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="index.html" class="btn btn-outline btn-lg">Back to Home</a>
+                <div style="margin-top:1.5rem;">
+                    <a href="index.html" class="btn btn-outline btn-lg">Back to Home</a>
+                </div>
             </div>
         </div>
     </section>
@@ -156,20 +266,347 @@
     </a>
 
     <script src="scripts/main.js"></script>
+
+    <!-- Firebase + Admin Logic -->
     <script type="module">
-     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-     import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-     import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-     import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
+        // 1. IMPORT FIREBASE MODULES FROM CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged, 
+            signInWithEmailAndPassword, 
+            signOut 
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs,
+            deleteDoc,
+            doc,
+            updateDoc,
+            query,
+            orderBy
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import {
+            getStorage,
+            ref,
+            uploadBytes,
+            getDownloadURL,
+            deleteObject
+        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-     import { firebaseConfig } from "./firebase-config.js";
+        // 2. TODO: PUT YOUR REAL FIREBASE CONFIG HERE
+        const firebaseConfig = {
+            apiKey: "AIzaSyDATeYRC4tcA70M5UKOo9urLti5taPSlow",
+            authDomain: "staic-app.firebaseapp.com",
+            projectId: "staic-app",
+            storageBucket: "staic-app.firebaseapp.com",
+            messagingSenderId: "73226909612",
+            appId: "1:73226909612:web:9e1256b7cc2faaa771ac09"
+        };
 
-     const app = initializeApp(firebaseConfig);
-     const auth = getAuth();
-     const db = getFirestore();
-     const storage = getStorage();
+        // 3. INITIALIZE
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-      // now you can write login + admin code
+        // 4. DOM ELEMENTS
+        const loginSection = document.getElementById("login-section");
+        const dashboardSection = document.getElementById("admin-dashboard");
+        const loginForm = document.getElementById("login-form");
+        const loginError = document.getElementById("login-error");
+        const adminUserEmail = document.getElementById("admin-user-email");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        const galleryForm = document.getElementById("gallery-form");
+        const galleryImageInput = document.getElementById("gallery-image");
+        const galleryTitleInput = document.getElementById("gallery-title");
+        const galleryDescInput = document.getElementById("gallery-description");
+        const galleryCategoryInput = document.getElementById("gallery-category");
+        const galleryItemsContainer = document.getElementById("gallery-items");
+        const galleryMessage = document.getElementById("gallery-message");
+
+        const feedbackItemsContainer = document.getElementById("feedback-items");
+        const enquiryItemsContainer = document.getElementById("enquiry-items");
+
+        // 5. AUTH STATE HANDLER
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginSection.style.display = "none";
+                dashboardSection.style.display = "block";
+                adminUserEmail.textContent = user.email || "";
+                // Load data once logged in
+                loadGalleryItems();
+                loadFeedbackItems();
+                loadEnquiryItems();
+            } else {
+                dashboardSection.style.display = "none";
+                loginSection.style.display = "block";
+                adminUserEmail.textContent = "";
+            }
+        });
+
+        // 6. LOGIN FORM SUBMIT
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            loginError.textContent = "";
+            const email = document.getElementById("admin-email").value.trim();
+            const password = document.getElementById("admin-password").value;
+
+            if (!email || !password) {
+                loginError.textContent = "Email and password are required.";
+                return;
+            }
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                // success handled by onAuthStateChanged
+                loginForm.reset();
+            } catch (err) {
+                console.error(err);
+                loginError.textContent = err.message || "Login failed.";
+            }
+        });
+
+        // 7. LOGOUT
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                await signOut(auth);
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+        // 8. GALLERY UPLOAD
+        galleryForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            galleryMessage.textContent = "";
+            const file = galleryImageInput.files[0];
+            if (!file) {
+                galleryMessage.textContent = "Please select an image.";
+                return;
+            }
+
+            const title = galleryTitleInput.value.trim();
+            const description = galleryDescInput.value.trim();
+            const category = galleryCategoryInput.value.trim();
+
+            const storagePath = "gallery/" + Date.now() + "-" + file.name;
+            const storageRef = ref(storage, storagePath);
+
+            try {
+                galleryMessage.textContent = "Uploading image...";
+                await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(storageRef);
+
+                await addDoc(collection(db, "gallery"), {
+                    title,
+                    description,
+                    category,
+                    imageUrl: url,
+                    storagePath,
+                    createdAt: Date.now()
+                });
+
+                galleryMessage.textContent = "Image uploaded successfully.";
+                galleryForm.reset();
+                loadGalleryItems();
+            } catch (err) {
+                console.error(err);
+                galleryMessage.textContent = "Error uploading image.";
+            }
+        });
+
+        // 9. LOAD GALLERY ITEMS
+        async function loadGalleryItems() {
+            if (!galleryItemsContainer) return;
+            galleryItemsContainer.innerHTML = "Loading...";
+
+            try {
+                const q = query(collection(db, "gallery"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+
+                if (snap.empty) {
+                    galleryItemsContainer.innerHTML = "<p style='font-size:0.85rem; color:var(--muted-foreground);'>No gallery items yet.</p>";
+                    return;
+                }
+
+                galleryItemsContainer.innerHTML = "";
+                snap.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const item = document.createElement("div");
+                    item.style.display = "flex";
+                    item.style.alignItems = "center";
+                    item.style.justifyContent = "space-between";
+                    item.style.gap = "0.75rem";
+                    item.style.padding = "0.5rem 0.25rem";
+                    item.style.borderBottom = "1px solid rgba(255,255,255,0.06)";
+
+                    item.innerHTML = `
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <img src="${data.imageUrl}" alt="${data.title || ""}" style="width:48px; height:48px; object-fit:cover; border-radius:0.5rem;">
+                            <div>
+                                <div style="font-size:0.95rem; font-weight:600;">${data.title || "Untitled"}</div>
+                                <div style="font-size:0.8rem; color:var(--muted-foreground);">
+                                    ${data.category || "Uncategorized"}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline btn-sm" data-id="${docSnap.id}" data-storage="${data.storagePath || ""}">
+                            Delete
+                        </button>
+                    `;
+
+                    const btn = item.querySelector("button");
+                    btn.addEventListener("click", async () => {
+                        if (!confirm("Delete this gallery item?")) return;
+                        await deleteGalleryItem(docSnap.id, data.storagePath);
+                    });
+
+                    galleryItemsContainer.appendChild(item);
+                });
+            } catch (err) {
+                console.error(err);
+                galleryItemsContainer.innerHTML = "<p style='font-size:0.85rem; color:#ff6b6b;'>Error loading gallery items.</p>";
+            }
+        }
+
+        async function deleteGalleryItem(docId, storagePath) {
+            try {
+                if (storagePath) {
+                    const storageRef = ref(storage, storagePath);
+                    await deleteObject(storageRef);
+                }
+                await deleteDoc(doc(db, "gallery", docId));
+                loadGalleryItems();
+            } catch (err) {
+                console.error(err);
+                alert("Error deleting item.");
+            }
+        }
+
+        // 10. LOAD FEEDBACK
+        async function loadFeedbackItems() {
+            if (!feedbackItemsContainer) return;
+            feedbackItemsContainer.innerHTML = "Loading...";
+
+            try {
+                const q = query(collection(db, "feedback"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+
+                if (snap.empty) {
+                    feedbackItemsContainer.innerHTML = "<p style='font-size:0.85rem; color:var(--muted-foreground);'>No feedback submitted yet.</p>";
+                    return;
+                }
+
+                feedbackItemsContainer.innerHTML = "";
+                snap.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const wrapper = document.createElement("div");
+                    wrapper.style.borderBottom = "1px solid rgba(255,255,255,0.06)";
+                    wrapper.style.padding = "0.5rem 0";
+
+                    const approved = data.approved ? true : false;
+
+                    wrapper.innerHTML = `
+                        <div style="font-size:0.9rem; font-weight:600;">
+                            ${data.name || "Unknown"} 
+                            <span style="font-size:0.8rem; color:var(--muted-foreground);">(${data.location || "Location not set"})</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--muted-foreground); margin:0.15rem 0;">
+                            ⭐ ${data.rating || "-"} · ${data.phone || "No phone"}
+                        </div>
+                        <div style="font-size:0.85rem; margin-bottom:0.35rem;">
+                            ${data.comment || ""}
+                        </div>
+                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                            <button class="btn btn-sm ${approved ? "btn-outline" : "btn-primary"}" data-action="toggle">
+                                ${approved ? "Unapprove" : "Approve"}
+                            </button>
+                            <button class="btn btn-outline btn-sm" data-action="delete">
+                                Delete
+                            </button>
+                            <span style="font-size:0.75rem; color:${approved ? "#4ade80" : "var(--muted-foreground)"};">
+                                Status: ${approved ? "Approved" : "Pending"}
+                            </span>
+                        </div>
+                    `;
+
+                    const approveBtn = wrapper.querySelector('button[data-action="toggle"]');
+                    const deleteBtn = wrapper.querySelector('button[data-action="delete"]');
+
+                    approveBtn.addEventListener("click", async () => {
+                        try {
+                            await updateDoc(doc(db, "feedback", docSnap.id), { approved: !approved });
+                            loadFeedbackItems();
+                        } catch (err) {
+                            console.error(err);
+                            alert("Error updating feedback.");
+                        }
+                    });
+
+                    deleteBtn.addEventListener("click", async () => {
+                        if (!confirm("Delete this feedback?")) return;
+                        try {
+                            await deleteDoc(doc(db, "feedback", docSnap.id));
+                            loadFeedbackItems();
+                        } catch (err) {
+                            console.error(err);
+                            alert("Error deleting feedback.");
+                        }
+                    });
+
+                    feedbackItemsContainer.appendChild(wrapper);
+                });
+            } catch (err) {
+                console.error(err);
+                feedbackItemsContainer.innerHTML = "<p style='font-size:0.85rem; color:#ff6b6b;'>Error loading feedback.</p>";
+            }
+        }
+
+        // 11. LOAD ENQUIRIES
+        async function loadEnquiryItems() {
+            if (!enquiryItemsContainer) return;
+            enquiryItemsContainer.innerHTML = "Loading...";
+
+            try {
+                const q = query(collection(db, "enquiries"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
+
+                if (snap.empty) {
+                    enquiryItemsContainer.innerHTML = "<p style='font-size:0.85rem; color:var(--muted-foreground);'>No enquiries yet.</p>";
+                    return;
+                }
+
+                enquiryItemsContainer.innerHTML = "";
+                snap.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const wrapper = document.createElement("div");
+                    wrapper.style.borderBottom = "1px solid rgba(255,255,255,0.06)";
+                    wrapper.style.padding = "0.5rem 0";
+
+                    wrapper.innerHTML = `
+                        <div style="font-size:0.9rem; font-weight:600;">
+                            ${data.name || "Unknown"} 
+                            <span style="font-size:0.8rem; color:var(--muted-foreground);">(${data.city || "No city"})</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--muted-foreground); margin:0.15rem 0;">
+                            📞 ${data.phone || "No phone"} · ✉️ ${data.email || "No email"}
+                        </div>
+                        <div style="font-size:0.85rem;">
+                            ${data.requirement || ""}
+                        </div>
+                    `;
+
+                    enquiryItemsContainer.appendChild(wrapper);
+                });
+            } catch (err) {
+                console.error(err);
+                enquiryItemsContainer.innerHTML = "<p style='font-size:0.85rem; color:#ff6b6b;'>Error loading enquiries.</p>";
+            }
+        }
     </script>
 
 </body>
