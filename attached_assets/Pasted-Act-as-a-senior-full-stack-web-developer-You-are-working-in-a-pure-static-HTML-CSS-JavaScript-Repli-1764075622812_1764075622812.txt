@@ -1,0 +1,399 @@
+Act as a senior full-stack web developer. You are working in a pure static HTML/CSS/JavaScript Replit project (no backend, no databases, no Replit-specific services).
+
+I want you to build a full website for a local business called Elite Technology with the following requirements.
+
+TECH & HOSTING CONSTRAINTS (IMPORTANT)
+
+Use ONLY:
+
+HTML
+
+CSS (Tailwind or custom CSS allowed)
+
+Vanilla JavaScript (no build tools required)
+
+Do NOT set up:
+
+Node.js, Express, Flask, Django or any backend server
+
+Replit DB, Replit Auth, or any Replit-specific backend services
+
+The final code must be deployable as a simple static site on:
+
+GitHub Pages
+
+Netlify
+
+Keep everything as static files.
+
+For Phase 2 (admin features), use Firebase on the frontend only:
+
+Firebase Authentication
+
+Cloud Firestore
+
+Firebase Storage
+
+No backend server is allowed.
+
+BRAND & DESIGN
+
+This website is for Elite Technology, a CCTV & security / IT services company in Karnataka, India.
+
+Design requirements:
+
+Dark background (black or dark grey)
+
+Colorful diagonal stripes (red/blue/purple/orange like their visiting card)
+
+“Elite” text in elegant script font, “Technology” and others in clean sans-serif font
+
+Fully responsive, mobile-first design
+
+Contact details to use:
+
+Business name: Elite Technology
+
+Address: M.G. Road, Channapatna – 562160, Ramanagara Dist.
+
+Branches: Mysore, Bangalore, Mandya, Ramanagaram
+
+Phone:
+
+Mohammed Kashif – +91 91088 65702
+
+Guru Prasad – +91 95387 37788
+
+Emails:
+
+mohammedkashif182@gmail.com
+
+elite9098@gmail.com
+
+BUSINESS INFORMATION & SERVICES
+
+Show these services:
+
+CCTV installation & maintenance
+
+Networking & Wi-Fi setup
+
+Computer technical support / repair
+
+Auto electrical & security systems
+
+Security & fingerprint lockers
+
+Door safe lock systems & access control
+
+Goal of the website:
+
+Generate more local clients
+
+Make calling, WhatsApp, and enquiry very easy
+
+PAGES & NAVIGATION
+
+Create a multi-page static site. All pages must share the same header and footer.
+
+Pages:
+
+HOME (index.html)
+
+Hero section
+
+Main title: “CCTV & Security Solutions in Channapatna & Ramanagara”
+
+Sub-text describing services
+
+Buttons:
+
+Call Now (tel:+919108865702)
+
+WhatsApp Us (WhatsApp API link)
+
+Get Free Quote (scroll to contact section or link to contact page)
+
+Highlight badges: “Since 2018”, “Branches in Mysore, Bangalore, Mandya, Ramanagaram”, “On-site field work”
+
+3–6 service cards
+
+Testimonials preview (static for now)
+
+SERVICES (services.html)
+
+Separate cards/sections for each service
+
+Each service should describe where it is useful (home, shop, school, warehouse, etc.)
+
+GALLERY (gallery.html)
+
+Responsive grid layout with placeholder images
+
+Prepare space for Firebase dynamic loading later
+
+PROJECTS / CLIENTS (projects.html)
+
+List project types: homes, apartments, schools, shops, factories, showrooms, godowns
+
+4–6 featured projects with placeholder images
+
+REVIEWS / FEEDBACK (reviews.html)
+
+Form fields:
+
+Name
+
+Phone
+
+Location
+
+Rating (1–5)
+
+Comment
+
+For now, prevent default submit and show “Thanks for your feedback”
+
+Space for testimonials from Firebase later
+
+ABOUT & BRANCHES (about.html)
+
+Company story (founded 2018, experience in CCTV & security)
+
+List of branches
+
+Placeholder Google Map embed (Channapatna)
+
+CONTACT (contact.html)
+
+Form fields:
+
+Name
+
+Phone
+
+Email (optional)
+
+City/Area
+
+Requirement
+
+On submit show success message only (for now)
+
+Display phone numbers, emails, office address
+
+Add:
+
+“Call Mohammed”
+
+“Call Guru Prasad”
+
+“WhatsApp Us”
+
+ADMIN (admin.html)
+
+See Firebase requirements below
+
+NAVIGATION:
+Always include menu links: Home, Services, Gallery, Projects, Reviews, About, Contact.
+
+FOOTER:
+Show contact details and branch list.
+
+SEO & META
+
+For every page:
+
+Add proper <title> (example: “CCTV Installation in Channapatna | Elite Technology”)
+
+Add <meta name="description">
+
+On home page include Open Graph tags (og:title, og:description, og:type, og:url, og:image placeholder)
+
+Use keywords:
+
+CCTV installation in Channapatna
+
+CCTV dealers in Ramanagara
+
+fingerprint door locks
+
+security systems Channapatna
+
+ADMIN + DYNAMIC CONTENT (PHASE 2)
+
+Use Firebase on frontend (no backend).
+Admin panel must load at /admin (admin.html).
+
+6.1 FIREBASE SETUP
+
+Create a file firebase-config.js:
+
+const firebaseConfig = {
+apiKey: "YOUR_API_KEY",
+authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+projectId: "YOUR_PROJECT_ID",
+storageBucket: "YOUR_PROJECT_ID.appspot.com",
+messagingSenderId: "YOUR_SENDER_ID",
+appId: "YOUR_APP_ID"
+};
+
+I will fill these values myself.
+
+Use Firebase CDN modular SDK via script tags.
+
+6.2 ADMIN LOGIN
+
+In admin.html:
+
+Show login form (email/password) using Firebase Authentication
+
+After login → show dashboard
+
+Before login → hide dashboard
+
+Add logout button
+
+UI may mention the admin email (elite9098@gmail.com
+)
+
+6.3 ADMIN DASHBOARD FEATURES
+
+A. Gallery Manager
+
+Form:
+
+Upload image file
+
+Title
+
+Description
+
+Category (Home/Shop/School/Factory/etc.)
+
+On submit:
+
+Upload image to Firebase Storage
+
+Store document in Firestore collection "gallery":
+
+imageUrl
+
+title
+
+description
+
+category
+
+createdAt (timestamp)
+
+Show list of existing gallery items:
+
+Thumbnail
+
+Title
+
+Category
+
+Delete button
+
+Delete should remove Firestore document AND Storage file
+
+B. Feedback Manager
+
+Load documents from "feedback" collection
+
+Fields:
+
+name
+
+phone
+
+location
+
+rating
+
+comment
+
+createdAt
+
+approved (true/false)
+
+Buttons:
+
+Approve / Unapprove
+
+Delete
+
+C. Enquiry Manager (Optional)
+
+Contact form should write to "enquiries" collection
+
+Admin panel should list enquiries in a table
+
+6.4 PUBLIC PAGES USING FIREBASE
+
+GALLERY PAGE
+
+Load items from "gallery" collection
+
+Render dynamically
+
+Add category filter (optional)
+
+REVIEWS PAGE
+
+Load items from "feedback" where approved == true
+
+Render testimonials
+
+CONTACT PAGE
+
+On submit:
+
+Save data to "enquiries" collection
+
+Show success message
+
+All Firebase code should use modular v9+ syntax.
+
+FOLDER STRUCTURE
+
+index.html
+services.html
+gallery.html
+projects.html
+reviews.html
+about.html
+contact.html
+admin.html
+
+styles/
+main.css
+
+scripts/
+main.js
+gallery.js
+reviews.js
+contact.js
+admin.js
+firebase-config.js
+
+assets/
+images/
+
+Ensure navigation links work correctly after hosting.
+
+FINAL DELIVERABLES
+
+All HTML/CSS/JS pages completed exactly as described
+
+Firebase integration set up with placeholder config
+
+Clear comments where Firebase config must be inserted
+
+Admin email/password setup commented
+
+No backend server, no Replit backend services
+
+Must work perfectly on GitHub Pages or Netlify
