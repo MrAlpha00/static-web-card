@@ -12,6 +12,10 @@ export default {
       },
       colors: {
         // Flat / base colors (regular buttons)
+        "brand-red": "hsl(var(--brand-red) / <alpha-value>)",
+        "brand-blue": "hsl(var(--brand-blue) / <alpha-value>)",
+        "brand-purple": "hsl(var(--brand-purple) / <alpha-value>)",
+        "brand-orange": "hsl(var(--brand-orange) / <alpha-value>)",
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",
         border: "hsl(var(--border) / <alpha-value>)",
@@ -84,6 +88,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
+        script: ["var(--font-script)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
