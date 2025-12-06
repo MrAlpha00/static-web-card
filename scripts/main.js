@@ -121,9 +121,11 @@
   // Observe all elements with animation classes
   const fadeElements = document.querySelectorAll('.fade-in-up');
   const scaleElements = document.querySelectorAll('.scale-in');
+  const founderCards = document.querySelectorAll('.founder-card');
   
   fadeElements.forEach(el => observer.observe(el));
   scaleElements.forEach(el => observer.observe(el));
+  founderCards.forEach(el => observer.observe(el));
 })();
 
 // Set Active Navigation Link
@@ -188,5 +190,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Theme Toggle
+(function initThemeToggle() {
+  // Always restore theme preference on page load
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  
+  // Update icon if present
+  if (themeIcon) {
+    themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+  }
+  
+  // Add click listener if toggle button exists
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      if (themeIcon) {
+        themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+      }
+    });
+  }
+})();
 
 console.log('Elite Technology - Website Loaded Successfully');

@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Elite Technology Gallery - View our CCTV installation projects and security solutions across Karnataka.">
-    <title>Gallery - Elite Technology</title>
+    <meta name="description" content="Elite Technology Gallery - View our CCTV installation projects and security solutions across South India. 70+ completed project photos.">
+    <meta name="keywords" content="CCTV installation gallery, security camera projects, surveillance installation photos, elite technology work, channapatna, bangalore, mysore">
+    <meta name="author" content="Elite Technology">
+    <meta name="robots" content="index, follow">
+    <title>Gallery - Elite Technology | Our Completed Projects</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav>
         <div class="container nav-container">
+            <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                <span id="theme-icon">🌙</span>
+            </button>
+
             <a href="index.html" class="logo">
-                <span class="logo-elite">Elite</span>
-                <span class="logo-tech">Technology</span>
+                <img src="assets/images/logo.jpg" alt="Elite Technology" class="logo-img">
             </a>
 
             <ul class="nav-links">
@@ -73,47 +79,38 @@
     <!-- Gallery Section -->
     <section style="padding: 4rem 0;">
         <div class="container">
-            <div class="card" style="text-align: center; padding: 4rem 2rem;">
-                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Gallery Coming Soon</h2>
-                <p style="color: var(--muted-foreground); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    We're currently updating our gallery with photos of recent installations. Check back soon to see our latest CCTV installations, security systems, and completed projects.
-                </p>
-                <p style="color: var(--muted-foreground); margin-bottom: 2rem;">
-                    In the meantime, feel free to contact us to discuss your security needs or view our services.
-                </p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="contact.html" class="btn btn-primary btn-lg pulse-glow">Get Free Quote</a>
-                    <a href="services.html" class="btn btn-outline btn-lg">View Services</a>
-                </div>
+            <div class="section-header" style="margin-bottom: 3rem;">
+                <h2>Our <span class="gradient-text">Installations</span></h2>
+                <p>Browse through our completed CCTV and security projects</p>
             </div>
 
-            <div class="grid grid-cols-3" style="margin-top: 3rem;">
-                <div class="card scale-in">
-                    <div style="aspect-ratio: 4/3; background: linear-gradient(135deg, var(--brand-red), var(--brand-purple)); border-radius: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem;">
-                        📹
-                    </div>
-                    <h3>CCTV Installations</h3>
-                    <p style="color: var(--muted-foreground);">Professional camera setups for homes and businesses</p>
-                </div>
+            <div id="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+            </div>
 
-                <div class="card scale-in">
-                    <div style="aspect-ratio: 4/3; background: linear-gradient(135deg, var(--brand-blue), var(--brand-orange)); border-radius: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem;">
-                        🔐
-                    </div>
-                    <h3>Security Systems</h3>
-                    <p style="color: var(--muted-foreground);">Advanced fingerprint and access control installations</p>
-                </div>
-
-                <div class="card scale-in">
-                    <div style="aspect-ratio: 4/3; background: linear-gradient(135deg, var(--brand-purple), var(--brand-blue)); border-radius: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 4rem;">
-                        📶
-                    </div>
-                    <h3>Network Setup</h3>
-                    <p style="color: var(--muted-foreground);">Complete networking and Wi-Fi solutions</p>
-                </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="contact.html" class="btn btn-primary btn-lg pulse-glow">Get Free Quote</a>
             </div>
         </div>
     </section>
+
+    <script>
+        const galleryImages = [];
+        for (let i = 21; i <= 90; i++) {
+            galleryImages.push(`assets/images/IMG-20251125-WA00${i < 10 ? '0' + i : i}.jpg`);
+        }
+        
+        const galleryGrid = document.getElementById('gallery-grid');
+        galleryImages.forEach((src, index) => {
+            const item = document.createElement('div');
+            item.className = 'scale-in';
+            item.style.cssText = 'aspect-ratio: 4/3; border-radius: 0.75rem; overflow: hidden; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease;';
+            item.innerHTML = `<img src="${src}" alt="Project ${index + 1}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.style.display='none'">`;
+            item.addEventListener('mouseenter', () => { item.style.transform = 'scale(1.05)'; item.style.boxShadow = '0 8px 30px rgba(255, 51, 102, 0.3)'; });
+            item.addEventListener('mouseleave', () => { item.style.transform = 'scale(1)'; item.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)'; });
+            item.addEventListener('click', () => openImage(src));
+            galleryGrid.appendChild(item);
+        });
+    </script>
 
     <!-- Footer -->
     <footer>
@@ -122,11 +119,10 @@
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section">
-                        <div style="display: flex; align-items: baseline; gap: 0.25rem; margin-bottom: 1rem;">
-                            <span class="logo-elite" style="font-size: 2rem;">Elite</span>
-                            <span style="font-size: 1.125rem; font-weight: 600;">Technology</span>
+                        <div style="margin-bottom: 1rem;">
+                            <img src="assets/images/logo.jpg" alt="Elite Technology" style="height: 60px; width: auto;">
                         </div>
-                        <p>Professional CCTV & Security Solutions since 2018. Serving Channapatna, Ramanagara, Mysore, Bangalore, and Mandya.</p>
+                        <p>Professional CCTV & Security Solutions since 2016. Serving all over South India including Karnataka, Tamil Nadu, and Andhra Pradesh.</p>
                     </div>
 
                     <div class="footer-section">
