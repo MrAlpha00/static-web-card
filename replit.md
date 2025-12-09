@@ -36,6 +36,21 @@ This is a professional static website for **Elite Technology**, a CCTV & securit
    - Helper functions for Firebase operations
    - Comprehensive setup documentation in FIREBASE_SETUP.md
 
+5. **Computer Support Experts Section (NEW - December 2024)**
+   - Added beautiful expert cards below Computer Technical Support service
+   - Team members: Syed Shabaz Ali (+91 96632 33232) and Mohammed Ifuu (+91 96645 44555)
+   - Gradient background with purple-red theme
+   - Hover effects with glowing photo borders
+   - Direct call and WhatsApp buttons for each expert
+   - Fully responsive design
+
+6. **Customer Review Submission System (NEW - December 2024)**
+   - Review form on reviews.html with name, location, service type, star rating, and review text
+   - Firebase Firestore integration for storing reviews
+   - Dynamic display of submitted reviews with "NEW" badge for recent ones
+   - Star rating selector with hover effects
+   - Reviews appear immediately after submission
+
 ## Project Architecture
 
 ### Frontend Structure
