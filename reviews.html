@@ -76,9 +76,74 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section style="padding: 4rem 0;">
+    <!-- Submit Review Section -->
+    <section style="padding: 4rem 0 2rem;">
         <div class="container">
+            <div class="review-form-section fade-in-up">
+                <h2 style="font-size: 2rem;">Share Your <span class="gradient-text">Experience</span></h2>
+                <p>We'd love to hear about your experience with Elite Technology!</p>
+                
+                <form class="review-form" id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name *</label>
+                        <input type="text" id="reviewerName" name="reviewerName" required placeholder="Enter your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewLocation">Location</label>
+                        <input type="text" id="reviewLocation" name="reviewLocation" placeholder="e.g., Bangalore, Mysore">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewService">Service Type</label>
+                        <select id="reviewService" name="reviewService">
+                            <option value="">Select a service</option>
+                            <option value="CCTV Installation">CCTV Installation</option>
+                            <option value="Networking & Wi-Fi">Networking & Wi-Fi</option>
+                            <option value="Computer Support">Computer Support</option>
+                            <option value="Auto Electrical">Auto Electrical</option>
+                            <option value="Fingerprint Lock">Fingerprint Lock</option>
+                            <option value="Access Control">Access Control</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Rating *</label>
+                        <div class="star-rating" id="starRating">
+                            <span class="star-input" data-value="1">★</span>
+                            <span class="star-input" data-value="2">★</span>
+                            <span class="star-input" data-value="3">★</span>
+                            <span class="star-input" data-value="4">★</span>
+                            <span class="star-input" data-value="5">★</span>
+                        </div>
+                        <input type="hidden" id="ratingValue" name="rating" value="5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewText">Your Review *</label>
+                        <textarea id="reviewText" name="reviewText" required placeholder="Tell us about your experience..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-submit pulse-glow">Submit Review</button>
+                </form>
+                
+                <div id="formMessage" style="text-align: center; margin-top: 1rem; display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section style="padding: 2rem 0 4rem;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>Customer <span class="gradient-text">Reviews</span></h2>
+                <p>See what our satisfied clients have to say</p>
+            </div>
+            
+            <!-- Firebase Reviews Container -->
+            <div id="firebaseReviews" class="firebase-reviews-container" style="margin-bottom: 2rem;"></div>
+            
             <div class="grid grid-cols-3">
                 <div class="card scale-in">
                     <div class="stars">
@@ -277,6 +342,11 @@
         💬
     </a>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="scripts/firebase-config.js"></script>
+    <script src="scripts/reviews.js"></script>
     <script src="scripts/main.js"></script>
 </body>
 </html>
